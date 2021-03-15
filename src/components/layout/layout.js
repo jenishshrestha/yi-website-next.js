@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 function Layout({ data, children }) {
   const { page, headerMenus, general, twitterSeo } = data || {};
 
-  const favicon = general?.themeOption?.favivon?.sourceUrl,
+  const favicon = general?.themeOption?.favicon?.sourceUrl,
     logo = general?.themeOption?.logo,
     seo = page?.seo,
     twitter = twitterSeo?.social?.twitter;
