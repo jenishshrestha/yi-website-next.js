@@ -8,6 +8,11 @@ import { GET_PAGES } from "../src/queries/pages/getPages";
 import { GET_PAGE } from "../src/queries/pages/getPage";
 
 import { sanitize } from "../src/utils/misc";
+import {
+  FALLBACK,
+  handleRedirectsAndReturnData,
+  isCustomPageUri,
+} from "../src/utils/slug";
 
 const Page = ({ data }) => {
   const router = useRouter();
@@ -39,7 +44,7 @@ export async function getStaticProps({ params }) {
     },
   });
 
-  return {
+  const defaultProps = {
     props: {
       data: data || {},
     },
@@ -50,6 +55,8 @@ export async function getStaticProps({ params }) {
      */
     revalidate: 1,
   };
+
+  return handleRedirectsAndReturnData(defaultProps, data, errors, "page");
 }
 
 export async function getStaticPaths() {
@@ -63,7 +70,7 @@ export async function getStaticPaths() {
 
   data?.pages?.nodes &&
     data?.pages?.nodes.map((page) => {
-      if (!isEmpty(page?.uri)) {
+      if (!isEmpty(page?.uri) && !isCustomPageUri(page?.uri)) {
         const slugs = page?.uri?.split("/").filter((pageSlug) => pageSlug);
         pathsData.push({ params: { slug: slugs } });
       }
