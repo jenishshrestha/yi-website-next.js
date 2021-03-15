@@ -1,0 +1,30 @@
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    ul.primaryMenu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding-top: 27px;
+
+        >li {
+            padding: 0 16px;
+
+            a {
+                color: hsla(var(--white), 0.5);
+                text-transform: uppercase;
+            }
+        }
+    }
+}

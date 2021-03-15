@@ -1,0 +1,47 @@
+//Breakpoint-mixin
+$breakpoints: ("xs": 0,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+  "xxl": 1440px,
+);
+
+@mixin mq($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+
+    @if $type==max {
+      $width: $width - 1px;
+    }
+
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+//Example
+//.example-header {
+//  padding: 20px;
+//  font-size: 16px;
+//  @include mq('md') {
+//    padding-top: 30px;
+//    font-size: 22px;
+//  }
+//}
+
+//for Max-width
+//.example-header {
+//  padding: 20px;
+//  font-size: 16px;
+//  @include mq('lg', max) {
+//    padding-top: 30px;
+//    font-size: 22px;
+//  }
+//}
+
+@mixin fontSize($size) {
+  font-size: $size; //Fallback in px
+  font-size: calculateRem($size);
+}
