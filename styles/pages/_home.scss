@@ -5,6 +5,7 @@
     padding: 70px 0 0;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     >div {
         flex-basis: 100%;
@@ -75,7 +76,7 @@
             h1 {
                 @include fontSize(45px);
                 line-height: 1;
-                margin: 0 0 25px;
+                margin: 0;
                 text-transform: uppercase;
                 font-weight: 300;
             }

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+
 import {
   Ellipse1,
   Ellipse2,
@@ -15,6 +17,41 @@ import {
 import Link from "next/link";
 
 const HomeBanner = ({ page }) => {
+  let image = useRef(null),
+    title = useRef(null),
+    button = useRef(null),
+    footer = useRef(null);
+
+  useEffect(() => {
+    let bannerAnimation = gsap.timeline();
+    let footerAnimation = gsap.timeline();
+
+    // tl.to(image, {duration: 0.8, y: 40, opacity: });
+
+    bannerAnimation
+      .fromTo(
+        image,
+        { duration: 0, y: 40, opacity: 0 },
+        { delay: 0.5, duration: 0.8, y: 0, opacity: 1 }
+      )
+      .fromTo(
+        title,
+        { duration: 0, y: 40, opacity: 0 },
+        { duration: 0.8, y: 0, opacity: 1 }
+      )
+      .fromTo(
+        button,
+        { duration: 0, y: 40, opacity: 0 },
+        { duration: 0.8, y: 0, opacity: 1 }
+      );
+
+    footerAnimation.fromTo(
+      footer,
+      { duration: 0, y: 40, opacity: 0 },
+      { duration: 0.8, y: 0, opacity: 1 }
+    );
+  }, []);
+
   const bannerImage = page?.homePage?.bannerImage?.sourceUrl,
     bannerLogo = page?.homePage?.bannerLogo?.sourceUrl,
     bannerTitle = page?.homePage?.bannerTitle,
@@ -28,6 +65,7 @@ const HomeBanner = ({ page }) => {
     phoneNumber = page?.homePage?.phoneNumber,
     googleMapLocation = page?.homePage?.googleMapLocation,
     emailAddress = page?.homePage?.emailAddress;
+
   return (
     <div className="homeBanner">
       <div className="homeBanner__background">
@@ -51,6 +89,7 @@ const HomeBanner = ({ page }) => {
             </div>
             {bannerLogo ? (
               <img
+                ref={(el) => (image = el)}
                 src={bannerLogo}
                 alt={page.homePage.bannerLogo?.altText}
                 width={page.homePage.bannerLogo?.mediaDetails?.width}
@@ -60,22 +99,28 @@ const HomeBanner = ({ page }) => {
               ""
             )}
 
-            {bannerTitle ? <h1>{bannerTitle}</h1> : ""}
+            {bannerTitle ? (
+              <h1 ref={(el) => (title = el)}>{bannerTitle}</h1>
+            ) : (
+              ""
+            )}
 
             {ctaButtonText ? (
-              <Link href={ctaButtonLink ? ctaButtonLink : "#"}>
-                <a className="btn btn-rounded btn-dark cta-button">
-                  {ctaButtonText}
-                  <span>→</span>
-                </a>
-              </Link>
+              <div className="magnetic-effect" ref={(el) => (button = el)}>
+                <Link href={ctaButtonLink ? ctaButtonLink : "#"}>
+                  <a className="btn btn-rounded btn-dark cta-button">
+                    {ctaButtonText}
+                    <span>→</span>
+                  </a>
+                </Link>
+              </div>
             ) : (
               ""
             )}
           </div>
         </div>
       </div>
-      <div className="homeBanner__footer">
+      <div className="homeBanner__footer" ref={(el) => (footer = el)}>
         <div className="container">
           <div className="homeBanner__footer--wrapper">
             <div className="homeBanner__footer--socialIcons">

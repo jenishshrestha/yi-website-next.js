@@ -1,15 +1,27 @@
-import { React, Fragment } from "react";
+import React, { useRef, useEffect, Fragment } from "react";
 import { isEmpty } from "lodash";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
+import { gsap, Power1 } from "gsap";
 
 const Nav = ({ headerMenus, siteLogo }) => {
+  const menus = headerMenus,
+    middleMenuNumber = menus.length / 2;
+
+  let logo = useRef(null);
+
+  useEffect(() => {
+    console.log(menus);
+    let floatAnimation = gsap.timeline({ repeat: -1 });
+
+    floatAnimation
+      .to(logo, { y: -10, ease: Power1.easeInOut, duration: 2 })
+      .to(logo, { y: 0, ease: Power1.easeInOut, duration: 2 });
+  }, []);
+
   if (isEmpty(headerMenus)) {
     return;
   }
-
-  const menus = headerMenus,
-    middleMenuNumber = menus.length / 2;
 
   return (
     <Fragment>
@@ -19,7 +31,7 @@ const Nav = ({ headerMenus, siteLogo }) => {
             return (
               <Fragment key={menu?.node?.id}>
                 {i === middleMenuNumber ? (
-                  <li>
+                  <li ref={(el) => (logo = el)}>
                     <Link href="/">
                       <a>
                         <img
