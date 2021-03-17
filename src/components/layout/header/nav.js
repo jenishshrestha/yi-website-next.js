@@ -8,15 +8,45 @@ const Nav = ({ headerMenus, siteLogo }) => {
   const menus = headerMenus,
     middleMenuNumber = menus.length / 2;
 
-  let logo = useRef(null);
+  let logo = useRef();
+  let menuRefArray = useRef([]);
 
-  useEffect(() => {
-    console.log(menus);
+  const floatAnimationFunction = () => {
     let floatAnimation = gsap.timeline({ repeat: -1 });
-
     floatAnimation
       .to(logo, { y: -10, ease: Power1.easeInOut, duration: 2 })
       .to(logo, { y: 0, ease: Power1.easeInOut, duration: 2 });
+
+    return floatAnimation;
+  };
+
+  const menuAnimationFunction = () => {
+    let menuAnimation = gsap.timeline();
+
+    if (menuRefArray.current && menuRefArray.current.length) {
+      menuRefArray.current.forEach((menuRef, i) => {
+        if (i === middleMenuNumber) {
+          menuAnimation.from(logo, {
+            opacity: 0,
+            y: -7,
+            ease: Power1.easeInOut,
+            duration: 0.5,
+          });
+        }
+        menuAnimation.from(menuRef, {
+          opacity: 0,
+          y: -7,
+          ease: Power1.easeInOut,
+          duration: 0.5,
+        });
+      });
+    }
+    return menuAnimation;
+  };
+
+  useEffect(() => {
+    var master = gsap.timeline();
+    master.add(menuAnimationFunction()).add(floatAnimationFunction());
   }, []);
 
   if (isEmpty(headerMenus)) {
@@ -30,7 +60,7 @@ const Nav = ({ headerMenus, siteLogo }) => {
           {menus.map((menu, i) => {
             return (
               <Fragment key={menu?.node?.id}>
-                {i === middleMenuNumber ? (
+                {i === middleMenuNumber && (
                   <li ref={(el) => (logo = el)}>
                     <Link href="/">
                       <a>
@@ -44,10 +74,8 @@ const Nav = ({ headerMenus, siteLogo }) => {
                       </a>
                     </Link>
                   </li>
-                ) : (
-                  ""
                 )}
-                <li>
+                <li ref={(el) => (menuRefArray.current[i] = el)}>
                   <Link href={menu?.node?.path}>
                     <a>{menu?.node?.label}</a>
                   </Link>

@@ -22,11 +22,8 @@ const HomeBanner = ({ page }) => {
     button = useRef(null),
     footer = useRef(null);
 
-  useEffect(() => {
+  const bannerAnimationFunction = () => {
     let bannerAnimation = gsap.timeline();
-    let footerAnimation = gsap.timeline();
-
-    // tl.to(image, {duration: 0.8, y: 40, opacity: });
 
     bannerAnimation
       .fromTo(
@@ -45,11 +42,22 @@ const HomeBanner = ({ page }) => {
         { duration: 0.8, y: 0, opacity: 1 }
       );
 
+    return bannerAnimation;
+  };
+
+  const footerAnimationFunction = () => {
+    let footerAnimation = gsap.timeline();
     footerAnimation.fromTo(
       footer,
       { duration: 0, y: 40, opacity: 0 },
       { duration: 0.8, y: 0, opacity: 1 }
     );
+    return footerAnimation;
+  };
+
+  useEffect(() => {
+    let master = gsap.timeline();
+    master.add(footerAnimationFunction()).add(bannerAnimationFunction());
   }, []);
 
   const bannerImage = page?.homePage?.bannerImage?.sourceUrl,
