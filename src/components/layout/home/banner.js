@@ -20,7 +20,10 @@ const HomeBanner = ({ page }) => {
   let image = useRef(null),
     title = useRef(null),
     button = useRef(null),
-    footer = useRef(null);
+    footer = useRef(null),
+    svg1 = useRef(null),
+    svg2 = useRef(null),
+    svg3 = useRef(null);
 
   const bannerAnimationFunction = () => {
     let bannerAnimation = gsap.timeline();
@@ -55,9 +58,40 @@ const HomeBanner = ({ page }) => {
     return footerAnimation;
   };
 
+  const pumpkinAnimationFunction = () => {
+    let svg1Animation = gsap.fromTo(
+      svg1,
+      { left: "50%", top: "50%", x: "-50%", y: "-50%" },
+      { left: "100%", top: 38, x: "-100%", y: "0%", duration: 0.8 }
+    );
+
+    let svg2Animation = gsap.fromTo(
+      svg2,
+      { left: "50%", top: "50%", x: "-50%", y: "-50%" },
+      { left: "0%", top: 38, x: "0%", y: "0%", duration: 0.8 }
+    );
+
+    let svg3Animation = gsap.fromTo(
+      svg3,
+      { left: "50%", top: "50%", x: "-50%", y: "-50%" },
+      { left: "50%", top: 0, x: "-50%", y: "0%", duration: 0.8 }
+    );
+
+    let pumpkinAnimation = gsap.timeline();
+
+    pumpkinAnimation.add(svg1Animation, 0.5);
+    pumpkinAnimation.add(svg2Animation, 0.5);
+    pumpkinAnimation.add(svg3Animation, 0.5);
+
+    return pumpkinAnimation;
+  };
+
   useEffect(() => {
     let master = gsap.timeline();
-    master.add(footerAnimationFunction()).add(bannerAnimationFunction());
+    master
+      .add(pumpkinAnimationFunction())
+      .add(footerAnimationFunction())
+      .add(bannerAnimationFunction());
   }, []);
 
   const bannerImage = page?.homePage?.bannerImage?.sourceUrl,
@@ -91,9 +125,16 @@ const HomeBanner = ({ page }) => {
         <div className="container">
           <div className="homeBanner__content--wrapper">
             <div className="homeBanner__content--svgs">
-              <Ellipse1 />
-              <Ellipse2 />
-              <Ellipse3 />
+              <div ref={(el) => (svg1 = el)}>
+                <Ellipse1 />
+              </div>
+              <div ref={(el) => (svg2 = el)}>
+                <Ellipse2 />
+              </div>
+
+              <div ref={(el) => (svg3 = el)}>
+                <Ellipse3 />
+              </div>
             </div>
             {bannerLogo ? (
               <img

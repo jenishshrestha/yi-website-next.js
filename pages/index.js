@@ -11,17 +11,15 @@ export default function Home({ data }) {
   const router = useRouter();
   const { page } = data;
 
+  // console.log(router);
+
   if (router.isFallback) {
     return <div>Generating Static Page</div>;
   }
 
   // console.log(page?.homePage?.bannerImage);
 
-  return (
-    <Layout data={data}>
-      <HomeBanner page={page} />
-    </Layout>
-  );
+  return <HomeBanner page={page} />;
 }
 
 export async function getStaticProps() {

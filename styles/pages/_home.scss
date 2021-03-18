@@ -86,24 +86,28 @@
             @extend %absoluteFullWidth;
             z-index: -1;
 
-            >svg {
+            >div {
                 position: absolute;
+                // left: 50%;
+                // top: 50%;
+                // transform: translate(-50%, -50%);
 
-                &:nth-child(1) {
-                    top: 38px;
-                    right: 0;
-                }
+                // &:nth-child(1) {
+    //     top: 38px;
+    //     left: 100%;
+    //     transform: translate(-100%, 0%);
+    // }
 
-                &:nth-child(2) {
-                    top: 38px;
-                    left: 0;
-                }
+                // &:nth-child(2) {
+                //     top: 38px;
+                //     left: 0;
+                // }
 
-                &:nth-child(3) {
-                    top: 0;
-                    left: 50%;
-                    transform: translateX(-50%);
-                }
+                // &:nth-child(3) {
+                //     top: 0;
+                //     left: 50%;
+                //     transform: translateX(-50%);
+                // }
             }
         }
     }
