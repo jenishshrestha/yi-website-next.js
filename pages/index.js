@@ -17,12 +17,10 @@ export default function Home({ data }) {
     return <div>Generating Static Page</div>;
   }
 
-  // console.log(page?.homePage?.bannerImage);
-
   return (
-    <Layout data={data}>
-      <HomeBanner page={page} />
-    </Layout>
+    // <Layout data={data}>
+    <HomeBanner page={page} />
+    // </Layout>
   );
 }
 

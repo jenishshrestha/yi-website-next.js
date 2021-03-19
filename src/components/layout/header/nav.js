@@ -45,7 +45,6 @@ const Nav = ({ headerMenus, siteLogo }) => {
   };
 
   useEffect(() => {
-    // console.log("j bhaye ni");
     var master = gsap.timeline();
     master.add(menuAnimationFunction()).add(floatAnimationFunction());
   }, []);

@@ -1,20 +1,28 @@
-import "../styles/globals.scss";
-// import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { ApolloProvider } from "@apollo/client";
 import client from "../src/apollo/client";
-// import Layout from "../src/components/layout/layout";
-import Header from "../src/components/layout/header/header";
+import Layout from "../src/components/layout/layout";
+// import Layout from "../components/layout";
+import "../styles/globals.scss";
 
 function MyApp({ Component, pageProps }) {
   const { data } = pageProps;
-  const { page, headerMenus, general, twitterSeo } = data || {};
+  const [dataCopy, setDataCopy] = useState({});
+
+  useEffect(() => {
+    if (data) {
+      setDataCopy(data);
+    }
+  }, [data]);
 
   return (
-    <ApolloProvider client={client}>
-      {/* <Layout> */}
-      <Component {...pageProps} />
-      {/* </Layout> */}
-    </ApolloProvider>
+    <>
+      <ApolloProvider client={client}>
+        <Layout data={dataCopy}>
+          <Component {...pageProps} />
+        </Layout>
+      </ApolloProvider>
+    </>
   );
 }
 

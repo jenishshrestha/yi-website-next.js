@@ -14,9 +14,9 @@ function Layout({ data, children }) {
     seo = page?.seo,
     twitter = twitterSeo?.social?.twitter;
 
-  if (isEmpty(page)) {
-    return;
-  }
+  // if (isEmpty(page)) {
+  //   return <>No page data available</>;
+  // }
 
   return (
     <Fragment>
