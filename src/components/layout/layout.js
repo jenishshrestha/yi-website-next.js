@@ -14,9 +14,7 @@ function Layout({ data, children }) {
     seo = page?.seo,
     twitter = twitterSeo?.social?.twitter;
 
-  // if (isEmpty(page)) {
-  //   return <>No page data available</>;
-  // }
+  // console.log(headerMenus?.edges);
 
   return (
     <Fragment>
@@ -37,7 +35,7 @@ function Layout({ data, children }) {
           />
         ) : null}
       </Head>
-      <Header primaryMenus={headerMenus.edges} siteLogo={logo} />
+      <Header primaryMenus={headerMenus?.edges} siteLogo={logo} />
       {children}
     </Fragment>
   );

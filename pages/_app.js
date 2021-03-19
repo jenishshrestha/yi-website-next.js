@@ -10,10 +10,10 @@ function MyApp({ Component, pageProps }) {
   const [dataCopy, setDataCopy] = useState({});
 
   useEffect(() => {
-    if (data) {
+    if (pageProps) {
       setDataCopy(data);
     }
-  }, [data]);
+  }, [pageProps]);
 
   return (
     <>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { gsap, Power1 } from "gsap";
 
 const Nav = ({ headerMenus, siteLogo }) => {
-  const menus = headerMenus,
+  const menus = headerMenus ? headerMenus : [],
     middleMenuNumber = menus.length / 2;
 
   let logo = useRef();
@@ -13,10 +13,11 @@ const Nav = ({ headerMenus, siteLogo }) => {
 
   const floatAnimationFunction = () => {
     let floatAnimation = gsap.timeline({ repeat: -1 });
-    floatAnimation
-      .to(logo, { y: -10, ease: Power1.easeInOut, duration: 2 })
-      .to(logo, { y: 0, ease: Power1.easeInOut, duration: 2 });
-
+    if (logo.current) {
+      floatAnimation
+        .to(logo, { y: -10, ease: Power1.easeInOut, duration: 2 })
+        .to(logo, { y: 0, ease: Power1.easeInOut, duration: 2 });
+    }
     return floatAnimation;
   };
 
@@ -47,11 +48,11 @@ const Nav = ({ headerMenus, siteLogo }) => {
   useEffect(() => {
     var master = gsap.timeline();
     master.add(menuAnimationFunction()).add(floatAnimationFunction());
-  }, []);
+  }, [menus.length]);
 
-  if (isEmpty(headerMenus)) {
-    return;
-  }
+  // if (isEmpty(headerMenus)) {
+  //   return;
+  // }
 
   return (
     <Fragment>
