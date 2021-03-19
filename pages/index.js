@@ -19,7 +19,11 @@ export default function Home({ data }) {
 
   // console.log(page?.homePage?.bannerImage);
 
-  return <HomeBanner page={page} />;
+  return (
+    <Layout data={data}>
+      <HomeBanner page={page} />
+    </Layout>
+  );
 }
 
 export async function getStaticProps() {

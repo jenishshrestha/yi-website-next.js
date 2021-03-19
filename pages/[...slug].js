@@ -24,11 +24,13 @@ const Page = ({ data }) => {
   }
   // console.log(data);
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: sanitize(data?.page?.content),
-      }}
-    />
+    <Layout data={data}>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: sanitize(data?.page?.content),
+        }}
+      />
+    </Layout>
   );
 };
 
