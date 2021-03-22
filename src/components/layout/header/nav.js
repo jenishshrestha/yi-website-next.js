@@ -8,12 +8,12 @@ const Nav = ({ headerMenus, siteLogo }) => {
   const menus = headerMenus ? headerMenus : [],
     middleMenuNumber = menus.length / 2;
 
-  let logo = useRef();
+  let logo = useRef(null);
   let menuRefArray = useRef([]);
 
   const floatAnimationFunction = () => {
     let floatAnimation = gsap.timeline({ repeat: -1 });
-    if (logo.current) {
+    if (menus.length) {
       floatAnimation
         .to(logo, { y: -10, ease: Power1.easeInOut, duration: 2 })
         .to(logo, { y: 0, ease: Power1.easeInOut, duration: 2 });
@@ -47,6 +47,8 @@ const Nav = ({ headerMenus, siteLogo }) => {
 
   useEffect(() => {
     var master = gsap.timeline();
+    // console.log(logo);
+    // console.log(menuRefArray);
     master.add(menuAnimationFunction()).add(floatAnimationFunction());
   }, [menus.length]);
 

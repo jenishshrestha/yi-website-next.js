@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import Magnetic from "./../../magnetic/magnetic";
 
 import {
   Ellipse1,
@@ -155,17 +156,21 @@ const HomeBanner = ({ page }) => {
             )}
 
             {ctaButtonText ? (
-              <div className="magnetic-effect" ref={(el) => (button = el)}>
-                <Link href={ctaButtonLink ? ctaButtonLink : "#"}>
-                  <a className="btn btn-rounded btn-dark cta-button">
-                    {ctaButtonText}
-                    <span>→</span>
-                  </a>
-                </Link>
+              <div className="" ref={(el) => (button = el)}>
+                <Magnetic>
+                  <Link href={ctaButtonLink ? ctaButtonLink : "#"}>
+                    <a className="btn btn-rounded btn-dark cta-button">
+                      {ctaButtonText}
+                      <span>→</span>
+                    </a>
+                  </Link>
+                </Magnetic>
               </div>
             ) : (
               ""
             )}
+
+            {/* <Magnetic>Button</Magnetic> */}
           </div>
         </div>
       </div>
