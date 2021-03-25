@@ -369,7 +369,7 @@ input,
 select,
 optgroup,
 textarea {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -459,8 +459,8 @@ ol {
   list-style: decimal;
 }
 
-li>ul,
-li>ol {
+li > ul,
+li > ol {
   margin-bottom: 0;
   margin-left: 1.5em;
 }
@@ -635,8 +635,8 @@ textarea {
   top: 0;
 }
 
-.main-navigation ul ul li:hover>ul,
-.main-navigation ul ul li.focus>ul {
+.main-navigation ul ul li:hover > ul,
+.main-navigation ul ul li.focus > ul {
   display: block;
   left: auto;
 }
@@ -645,8 +645,8 @@ textarea {
   width: 200px;
 }
 
-.main-navigation ul li:hover>ul,
-.main-navigation ul li.focus>ul {
+.main-navigation ul li:hover > ul,
+.main-navigation ul li.focus > ul {
   left: auto;
 }
 
@@ -666,7 +666,6 @@ textarea {
 }
 
 @media screen and (min-width: 37.5em) {
-
   .menu-toggle {
     display: none;
   }
@@ -901,7 +900,6 @@ textarea {
 /* Alignments
 --------------------------------------------- */
 .alignleft {
-
   /*rtl:ignore*/
   float: left;
 
@@ -911,7 +909,6 @@ textarea {
 }
 
 .alignright {
-
   /*rtl:ignore*/
   float: right;
 
