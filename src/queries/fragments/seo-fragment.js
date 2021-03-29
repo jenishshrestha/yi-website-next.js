@@ -1,9 +1,5 @@
 const SeoFragment = `
 fragment SeoFragment on PostTypeSEO {
-  breadcrumbs {
-    text
-    url
-  }
   metaDesc
   metaRobotsNofollow
   metaRobotsNoindex

@@ -1,26 +1,25 @@
 import { React, Fragment } from "react";
 import client from "../src/apollo/client";
-import Layout from "../src/components/layout/layout";
-import { isEmpty } from "lodash";
 import { useRouter } from "next/router";
 import { GET_HOME_PAGE } from "../src/queries/pages/get-home-page";
-import { sanitize } from "../src/utils/misc";
 import HomeBanner from "../src/components/layout/home/banner";
+import Seo from "./../src/components/seo";
 
 export default function Home({ data }) {
   const router = useRouter();
-  const { page } = data;
+  const { page, twitterSeo } = data;
 
-  // console.log(router);
+  const twitter = twitterSeo?.social?.twitter;
 
   if (router.isFallback) {
     return <div>Generating Static Page</div>;
   }
 
   return (
-    // <Layout data={data}>
-    <HomeBanner page={page} />
-    // </Layout>
+    <>
+      <Seo seo={page?.seo} uri={page?.uri} twitter={twitter} />
+      <HomeBanner page={page} />
+    </>
   );
 }
 

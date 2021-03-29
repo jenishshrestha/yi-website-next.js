@@ -1,13 +1,14 @@
-import { gql } from "@apollo/client";
-import MenuFragment from "../fragments/menus";
-import ImageFragment from "../fragments/imageFragment";
-import SeoFragment from "../fragments/seo-fragment";
-import { GlobalQueries } from "../get-menus";
+import { gql } from "@apollo/client"
+import MenuFragment from "../fragments/menus"
+import ImageFragment from "../fragments/imageFragment"
+import SeoFragment from "../fragments/seo-fragment"
+import { GlobalQueries } from "../get-menus"
 
 export const GET_HOME_PAGE = gql`
 query GET_HOME_PAGE($uri: String) {
 	${GlobalQueries}
 	page: pageBy(uri: $uri) {
+	# page: page(id: $uri, idType: URI) {
 	    id
 	    title
 	    content
@@ -40,4 +41,4 @@ query GET_HOME_PAGE($uri: String) {
 ${MenuFragment}
 ${ImageFragment}
 ${SeoFragment}
-`;
+`

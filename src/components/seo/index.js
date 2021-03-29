@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { NextSeo } from "next-seo";
 import PropTypes from "prop-types";
 

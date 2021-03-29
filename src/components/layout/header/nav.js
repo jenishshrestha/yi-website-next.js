@@ -1,12 +1,14 @@
 import React, { useRef, useEffect, Fragment } from "react";
-import { isEmpty } from "lodash";
+// import { isEmpty } from "lodash";
 import Link from "next/link";
-// import Image from "next/image";
 import { gsap, Power1 } from "gsap";
+import { useRouter } from "next/router";
 
 const Nav = ({ headerMenus, siteLogo }) => {
   const menus = headerMenus ? headerMenus : [],
     middleMenuNumber = menus.length / 2;
+
+  const { asPath } = useRouter();
 
   let logo = useRef(null);
   let menuRefArray = useRef([]);
@@ -47,24 +49,22 @@ const Nav = ({ headerMenus, siteLogo }) => {
 
   useEffect(() => {
     var master = gsap.timeline();
-    // console.log(logo);
-    // console.log(menuRefArray);
     master.add(menuAnimationFunction()).add(floatAnimationFunction());
   }, [menus.length]);
-
-  // if (isEmpty(headerMenus)) {
-  //   return;
-  // }
 
   return (
     <Fragment>
       {menus.length ? (
         <ul className="primaryMenu">
           {menus.map((menu, i) => {
+            const className = asPath === menu?.node?.path ? "active" : "";
             return (
               <Fragment key={menu?.node?.id}>
                 {i === middleMenuNumber && (
-                  <li ref={(el) => (logo = el)}>
+                  <li
+                    className={asPath === "/" ? "active" : ""}
+                    ref={(el) => (logo = el)}
+                  >
                     <Link href="/">
                       <a>
                         <img
@@ -78,7 +78,10 @@ const Nav = ({ headerMenus, siteLogo }) => {
                     </Link>
                   </li>
                 )}
-                <li ref={(el) => (menuRefArray.current[i] = el)}>
+                <li
+                  className={className}
+                  ref={(el) => (menuRefArray.current[i] = el)}
+                >
                   <Link href={menu?.node?.path}>
                     <a>{menu?.node?.label}</a>
                   </Link>
