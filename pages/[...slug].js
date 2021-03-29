@@ -1,40 +1,43 @@
-import { React, Fragment } from "react";
-import client from "../src/apollo/client";
-import Layout from "../src/components/layout/layout";
-import { isEmpty } from "lodash";
-import { useRouter } from "next/router";
-
-import { GET_PAGES } from "../src/queries/pages/getPages";
-import { GET_PAGE } from "../src/queries/pages/getPage";
-
-import { sanitize } from "../src/utils/misc";
+import { React, Fragment } from "react"
+import client from "../src/apollo/client"
+import { isEmpty } from "lodash"
+import { useRouter } from "next/router"
+import Seo from "./../src/components/seo"
+import { GET_PAGES } from "../src/queries/pages/getPages"
+import { GET_PAGE } from "../src/queries/pages/getPage"
+import { sanitize } from "../src/utils/misc"
 import {
   FALLBACK,
   handleRedirectsAndReturnData,
   isCustomPageUri,
-} from "../src/utils/slug";
+} from "../src/utils/slug"
+
+import dynamic from "next/dynamic"
 
 const Page = ({ data }) => {
-  const router = useRouter();
+  const router = useRouter()
 
-  // If the page is not yet generated, this will be displayed
-  // initially until getStaticProps() finishes running
   if (router.isFallback) {
-    return <div>Generating Static Page</div>;
+    return <div>Generating Static Page</div>
   }
-  // console.log(data);
-  return (
-    // <Layout data={data}>
-    <div
-      dangerouslySetInnerHTML={{
-        __html: sanitize(data?.page?.title),
-      }}
-    />
-    // </Layout>
-  );
-};
 
-export default Page;
+  const { page, twitterSeo } = data,
+    twitter = twitterSeo?.social?.twitter
+
+  const tempName = page?.template?.templateName,
+    templateName = tempName.replace(/\s+/g, "-").toLowerCase()
+
+  const Template = dynamic(() => import(`../templates/page/${templateName}`))
+
+  return (
+    <>
+      <Template title={data?.page?.title} />
+      <Seo seo={page?.seo} uri={page?.uri} twitter={twitter} />
+    </>
+  )
+}
+
+export default Page
 
 export async function getStaticProps({ params }) {
   const { data, errors } = await client.query({
@@ -42,7 +45,7 @@ export async function getStaticProps({ params }) {
     variables: {
       uri: params?.slug.join("/"),
     },
-  });
+  })
 
   const defaultProps = {
     props: {
@@ -54,30 +57,30 @@ export async function getStaticProps({ params }) {
      * static file inside .next folder with the new data, so that any 'SUBSEQUENT' requests should have updated data.
      */
     revalidate: 1,
-  };
+  }
 
-  return defaultProps;
+  return defaultProps
 }
 
 export async function getStaticPaths() {
   const { data } = await client.query({
     query: GET_PAGES,
-  });
+  })
 
-  const pathsData = [];
+  const pathsData = []
 
   // console.log(data.pages.nodes);
 
   data?.pages?.nodes &&
     data?.pages?.nodes.map((page) => {
       if (!isEmpty(page?.uri) && !isCustomPageUri(page?.uri)) {
-        const slugs = page?.uri?.split("/").filter((pageSlug) => pageSlug);
-        pathsData.push({ params: { slug: slugs } });
+        const slugs = page?.uri?.split("/").filter((pageSlug) => pageSlug)
+        pathsData.push({ params: { slug: slugs } })
       }
-    });
+    })
 
   return {
     paths: pathsData,
     fallback: true,
-  };
+  }
 }

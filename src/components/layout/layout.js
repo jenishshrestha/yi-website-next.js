@@ -2,7 +2,6 @@ import { React, Fragment } from "react";
 import Header from "./header/header";
 import Head from "next/head";
 import Seo from "../seo";
-import { isEmpty } from "lodash";
 import { sanitize } from "../../utils/misc";
 import PropTypes from "prop-types";
 
@@ -14,11 +13,9 @@ function Layout({ data, children }) {
     seo = page?.seo,
     twitter = twitterSeo?.social?.twitter;
 
-  // console.log(headerMenus?.edges);
-
   return (
     <Fragment>
-      <Seo seo={page?.seo} uri={page?.uri} twitter={twitter} />
+      {/* <Seo seo={page?.seo} uri={page?.uri} twitter={twitter} /> */}
       <Head>
         <link rel="shortcut icon" href={favicon}></link>
         <link rel="preconnect" href="https://fonts.gstatic.com"></link>
@@ -26,12 +23,12 @@ function Layout({ data, children }) {
           href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
           rel="stylesheet"
         ></link>
-        {seo?.schema?.raw ? (
+        {seo?.schemaDetails ? (
           <script
             type="application/ld+json"
             className="yoast-schema-graph"
             key="yoastSchema"
-            dangerouslySetInnerHTML={{ __html: sanitize(seo?.schema?.raw) }}
+            dangerouslySetInnerHTML={{ __html: sanitize(seo?.schemaDetails) }}
           />
         ) : null}
       </Head>

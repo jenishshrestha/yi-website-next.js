@@ -1,0 +1,23 @@
+.dot-cursor {
+    position: fixed;
+    left: -3px;
+    top: -3px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: hsl(var(--white));
+    z-index: 99;
+    pointer-events: none;
+}
+
+.circle-cursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    left: -15px;
+    top: -15px;
+    border-radius: 50%;
+    z-index: 98;
+    border: 1px solid hsl(var(--primary));
+    pointer-events: none;
+}

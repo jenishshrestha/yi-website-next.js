@@ -99,14 +99,14 @@ const Magnetic = ({ children }) => {
   useEffect(() => {
     registerBounds();
     window.addEventListener("mousemove", updateMouseCoords);
+    window.addEventListener("resize", registerBounds);
 
     return () => {
       // cleanup
       window.removeEventListener("mousemove", updateMouseCoords);
+      window.removeEventListener("resize", registerBounds);
     };
   }, []);
-
-  console.log("rerender");
 
   return (
     <div className="magnetic" ref={childRef}>

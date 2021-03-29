@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import Magnetic from "./../../magnetic/magnetic";
+import React, { useEffect, useRef, useState } from "react"
+import { gsap } from "gsap"
+import Magnetic from "./../../magnetic/magnetic"
 
 import {
   Ellipse1,
@@ -14,8 +14,8 @@ import {
   Phone,
   Location,
   Email,
-} from "../../icons/home";
-import Link from "next/link";
+} from "../../icons/home"
+import Link from "next/link"
 
 const HomeBanner = ({ page }) => {
   let image = useRef(null),
@@ -24,76 +24,76 @@ const HomeBanner = ({ page }) => {
     footer = useRef(null),
     svg1 = useRef(null),
     svg2 = useRef(null),
-    svg3 = useRef(null);
+    svg3 = useRef(null)
 
   const bannerAnimationFunction = () => {
-    let bannerAnimation = gsap.timeline();
+    let bannerAnimation = gsap.timeline()
 
     bannerAnimation
       .fromTo(
-        image,
+        image.current,
         { duration: 0, y: 40, opacity: 0 },
         { delay: 0.5, duration: 0.8, y: 0, opacity: 1 }
       )
       .fromTo(
-        title,
+        title.current,
         { duration: 0, y: 40, opacity: 0 },
         { duration: 0.8, y: 0, opacity: 1 }
       )
       .fromTo(
-        button,
+        button.current,
         { duration: 0, y: 40, opacity: 0 },
         { duration: 0.8, y: 0, opacity: 1 }
-      );
+      )
 
-    return bannerAnimation;
-  };
+    return bannerAnimation
+  }
 
   const footerAnimationFunction = () => {
-    let footerAnimation = gsap.timeline();
+    let footerAnimation = gsap.timeline()
     footerAnimation.fromTo(
-      footer,
+      footer.current,
       { duration: 0, y: 40, opacity: 0 },
       { duration: 0.8, y: 0, opacity: 1 }
-    );
-    return footerAnimation;
-  };
+    )
+    return footerAnimation
+  }
 
   const pumpkinAnimationFunction = () => {
     let svg1Animation = gsap.fromTo(
-      svg1,
+      svg1.current,
       { left: "50%", top: "50%", x: "-50%", y: "-50%" },
       { left: "100%", top: 38, x: "-100%", y: "0%", duration: 0.8 }
-    );
+    )
 
     let svg2Animation = gsap.fromTo(
-      svg2,
+      svg2.current,
       { left: "50%", top: "50%", x: "-50%", y: "-50%" },
       { left: "0%", top: 38, x: "0%", y: "0%", duration: 0.8 }
-    );
+    )
 
     let svg3Animation = gsap.fromTo(
-      svg3,
+      svg3.current,
       { left: "50%", top: "50%", x: "-50%", y: "-50%" },
       { left: "50%", top: 0, x: "-50%", y: "0%", duration: 0.8 }
-    );
+    )
 
-    let pumpkinAnimation = gsap.timeline();
+    let pumpkinAnimation = gsap.timeline()
 
-    pumpkinAnimation.add(svg1Animation, 0.5);
-    pumpkinAnimation.add(svg2Animation, 0.5);
-    pumpkinAnimation.add(svg3Animation, 0.5);
+    pumpkinAnimation.add(svg1Animation, 0.5)
+    pumpkinAnimation.add(svg2Animation, 0.5)
+    pumpkinAnimation.add(svg3Animation, 0.5)
 
-    return pumpkinAnimation;
-  };
+    return pumpkinAnimation
+  }
 
   useEffect(() => {
-    let master = gsap.timeline();
+    let master = gsap.timeline()
     master
       .add(pumpkinAnimationFunction())
       .add(footerAnimationFunction())
-      .add(bannerAnimationFunction());
-  }, []);
+      .add(bannerAnimationFunction())
+  }, [])
 
   const bannerImage = page?.homePage?.bannerImage?.sourceUrl,
     bannerLogo = page?.homePage?.bannerLogo?.sourceUrl,
@@ -107,7 +107,7 @@ const HomeBanner = ({ page }) => {
     mediumLink = page?.homePage?.medium,
     phoneNumber = page?.homePage?.phoneNumber,
     googleMapLocation = page?.homePage?.googleMapLocation,
-    emailAddress = page?.homePage?.emailAddress;
+    emailAddress = page?.homePage?.emailAddress
 
   return (
     <div className="homeBanner">
@@ -126,20 +126,20 @@ const HomeBanner = ({ page }) => {
         <div className="container">
           <div className="homeBanner__content--wrapper">
             <div className="homeBanner__content--svgs">
-              <div ref={(el) => (svg1 = el)}>
+              <div ref={svg1}>
                 <Ellipse1 />
               </div>
-              <div ref={(el) => (svg2 = el)}>
+              <div ref={svg2}>
                 <Ellipse2 />
               </div>
 
-              <div ref={(el) => (svg3 = el)}>
+              <div ref={svg3}>
                 <Ellipse3 />
               </div>
             </div>
             {bannerLogo ? (
               <img
-                ref={(el) => (image = el)}
+                ref={image}
                 src={bannerLogo}
                 alt={page.homePage.bannerLogo?.altText}
                 width={page.homePage.bannerLogo?.mediaDetails?.width}
@@ -149,14 +149,10 @@ const HomeBanner = ({ page }) => {
               ""
             )}
 
-            {bannerTitle ? (
-              <h1 ref={(el) => (title = el)}>{bannerTitle}</h1>
-            ) : (
-              ""
-            )}
+            {bannerTitle ? <h1 ref={title}>{bannerTitle}</h1> : ""}
 
             {ctaButtonText ? (
-              <div className="" ref={(el) => (button = el)}>
+              <div className="" ref={button}>
                 <Magnetic>
                   <Link href={ctaButtonLink ? ctaButtonLink : "#"}>
                     <a className="btn btn-rounded btn-dark cta-button">
@@ -174,7 +170,7 @@ const HomeBanner = ({ page }) => {
           </div>
         </div>
       </div>
-      <div className="homeBanner__footer" ref={(el) => (footer = el)}>
+      <div className="homeBanner__footer" ref={footer}>
         <div className="container">
           <div className="homeBanner__footer--wrapper">
             <div className="homeBanner__footer--socialIcons">
@@ -214,7 +210,7 @@ const HomeBanner = ({ page }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomeBanner;
+export default HomeBanner
