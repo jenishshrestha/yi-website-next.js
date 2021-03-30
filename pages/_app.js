@@ -3,6 +3,7 @@ import { ApolloProvider } from "@apollo/client"
 import client from "../src/apollo/client"
 import Layout from "../src/components/layout/layout"
 import { gsap } from "gsap"
+import "swiper/swiper-bundle.min.css"
 import "../styles/globals.scss"
 // import Router from "next/router";
 
