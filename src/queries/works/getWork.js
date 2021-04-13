@@ -4,18 +4,16 @@ import ImageFragment from "./../fragments/imageFragment"
 import SeoFragment from "./../fragments/seo-fragment"
 import { GlobalQueries } from "./../get-menus"
 
-export const GET_PAGE = gql`
-query GET_PAGE($uri: String) {
+export const GET_WORK = gql`
+query GET_WORK($slug: String) {
 	${GlobalQueries}
-	page: pageBy(uri: $uri) {
+	work: workBy(uri: $slug) {
+	# work: work(id: $slug, idType: SLUG) {
 	    id
 	    title
 	    content
 	    slug
 	    uri
-		template {
-			templateName
-		}
 	    seo {
           ...SeoFragment
         }
