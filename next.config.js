@@ -20,4 +20,7 @@ module.exports = {
 
     return config
   },
+  images: {
+    domains: ['cms.yipl.staging.yipl.com.np'],
+  },
 }
