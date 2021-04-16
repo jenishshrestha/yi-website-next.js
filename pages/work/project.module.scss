@@ -1,3 +1,5 @@
+@use '../../styles/abstracts/functions' as functions;
+
 .headingWrapper {
   position: relative;
   z-index: 10;
@@ -16,16 +18,16 @@
 }
 
 .title {
-  margin: 0 0 15px 0;
+  margin: 0 0 5px 0;
   font-weight: 300;
-  font-size: 72px;
+  font-size: functions.calculateRem(72px);
   text-transform: uppercase;
 }
 
 .description {
   max-width: 660px;
   margin: 0;
-  font-size: 18px;
+  font-size: functions.calculateRem(18px);
   line-height: 1.6;
 }
 
@@ -53,7 +55,7 @@
 
 .metaLabel {
   margin-bottom: 15px;
-  font-size: 14px;
+  font-size: functions.calculateRem(14px);
   text-transform: uppercase;
   opacity: 50%;
 }
@@ -62,6 +64,7 @@
   position: relative;
   margin-top: 30px;
   color: hsl(var(--white));
+  font-size: functions.calculateRem(14px);
   text-transform: uppercase;
   background: none;
   border: none;
