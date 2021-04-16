@@ -15,6 +15,7 @@ import {
 import dynamic from "next/dynamic"
 
 const Page = ({ data }) => {
+  console.log(data)
   const router = useRouter()
 
   if (router.isFallback) {
@@ -31,7 +32,7 @@ const Page = ({ data }) => {
 
   return (
     <>
-      <Template title={data?.page?.title} />
+      <Template title={data?.page?.title} works={data?.works} />
       <Seo seo={page?.seo} uri={page?.uri} twitter={twitter} />
     </>
   )

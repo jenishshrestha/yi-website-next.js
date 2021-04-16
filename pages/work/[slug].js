@@ -1,12 +1,14 @@
-import React from "react"
-import { isEmpty } from "lodash"
-import { useRouter } from "next/router"
-import client from "./../../src/apollo/client"
-import Seo from "./../../src/components/seo"
-import { GET_WORKS } from "./../../src/queries/works/getWorks"
-import { GET_WORK } from "./../../src/queries/works/getWork"
+import { isEmpty } from 'lodash'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
+import client from './../../src/apollo/client'
+import Seo from './../../src/components/seo'
+import { GET_WORKS } from './../../src/queries/works/getWorks'
+import { GET_WORK } from './../../src/queries/works/getWork'
+import projectStyles from './project.module.scss'
 
-const Work = ({ data }) => {
+const Work = (props) => {
+  const { data } = props
   const router = useRouter()
 
   if (router.isFallback) {
@@ -18,10 +20,77 @@ const Work = ({ data }) => {
   const { work, twitterSeo } = data,
     twitter = twitterSeo?.social?.twitter
 
+  console.log(work)
+
+  const MetaItem = ({ label, title }) => {
+    return (
+      <div className={projectStyles.metaItem}>
+        <p className={projectStyles.metaLabel}>{label}</p>
+        <p className={projectStyles.metaTitle}>{title}</p>
+      </div>
+    )
+  }
+
   return (
     <>
       <Seo seo={work?.seo} uri={work?.uri} twitter={twitter} />
-      {work?.title}
+      <div>
+        <div className={projectStyles.headingWrapper}>
+          <Image
+            src={work.featuredImage.node.sourceUrl}
+            alt='Work detail'
+            layout='fill'
+            objectFit='cover'
+          />
+          <div className={projectStyles.heading}>
+            <div className='container'>
+              <h2 className={projectStyles.title}>{work.title}</h2>
+              <p className={projectStyles.description}>
+                {work.workCptOptions.projectHeading}
+              </p>
+            </div>
+          </div>
+          <div className='container'>
+            <button
+              className={projectStyles.back}
+              onClick={() => router.back()}
+            >
+              Back
+            </button>
+          </div>
+        </div>
+        <div className={`container projectStyles-body ${projectStyles.body}`}>
+          <div className={projectStyles.metaInfo}>
+            <MetaItem label='Client' title={work.workCptOptions.clientName} />
+            <MetaItem
+              label='Duration'
+              title={work.workCptOptions.projectDuration}
+            />
+            <MetaItem
+              label='What we did'
+              title={work.workCptOptions.whatWeDid}
+            />
+          </div>
+          <div className={projectStyles.content}>
+            <h1>How it all began?</h1>
+            <p>
+              We’ve decided to redevelop AidStream from scratch with a mission
+              to make publishing IATI data effortless for our users.
+            </p>
+            <p>
+              When we launched our IATI publishing tool back in 2010, the
+              technology we used hindered us from improving the site over time.
+              We were not able to add new features and enhancements that
+              AidStream users needed to make the system simpler.
+            </p>
+            <p>
+              With hundreds of organisations now using AidStream to publish
+              information on their development projects to the IATI Standard,
+              the time has come to modernise our system for the future.
+            </p>
+          </div>
+        </div>
+      </div>
     </>
   )
 }
@@ -32,7 +101,7 @@ export async function getStaticProps({ params }) {
   const { data, errors } = await client.query({
     query: GET_WORK,
     variables: {
-      slug: "work/" + params?.slug,
+      slug: 'work/' + params?.slug,
     },
   })
 

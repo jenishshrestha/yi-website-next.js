@@ -1,8 +1,8 @@
-import { gql } from "@apollo/client"
-import MenuFragment from "./../fragments/menus"
-import ImageFragment from "./../fragments/imageFragment"
-import SeoFragment from "./../fragments/seo-fragment"
-import { GlobalQueries } from "./../get-menus"
+import { gql } from '@apollo/client'
+import MenuFragment from './../fragments/menus'
+import ImageFragment from './../fragments/imageFragment'
+import SeoFragment from './../fragments/seo-fragment'
+import { GlobalQueries } from './../get-menus'
 
 export const GET_WORK = gql`
 query GET_WORK($slug: String) {
@@ -17,6 +17,18 @@ query GET_WORK($slug: String) {
 	    seo {
           ...SeoFragment
         }
+			featuredImage {
+				node {
+					id
+					sourceUrl
+				}
+    	}
+			workCptOptions {
+				clientName
+				projectDuration
+				projectHeading
+				whatWeDid
+			}
 	}
 }
 ${MenuFragment}

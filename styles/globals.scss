@@ -1,15 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,300&display=swap');
 @import './abstracts/variables';
 @import './abstracts/inheritance';
 @import './abstracts/functions';
 @import './abstracts/mixins';
+@import './normalize';
+@import './reset';
+@import './vender-overwrite';
+
+@import './layout';
+@import './utilities/btn';
+@import './header/header';
+@import './pages/home';
+@import './pages/work';
+@import './cursor';
 
 html,
 body {
-  background-color: hsl(var(--dark));
   padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 18px;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  line-height: 1.5;
+  background-color: hsl(var(--dark));
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -20,14 +34,3 @@ a {
 * {
   box-sizing: border-box;
 }
-
-
-@import './normalize';
-@import './layout';
-
-@import './utilities/btn';
-
-@import './header/header';
-@import './pages/home';
-
-@import './cursor';

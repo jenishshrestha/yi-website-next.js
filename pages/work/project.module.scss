@@ -1,0 +1,82 @@
+.headingWrapper {
+  position: relative;
+  z-index: 10;
+  height: 600px;
+  background: hsl(var(--dark));
+}
+
+.heading {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 28px 0 20px;
+  color: hsl(var(--white));
+  background: hsla(var(--primary) / 90%);
+}
+
+.title {
+  margin: 0 0 15px 0;
+  font-weight: 300;
+  font-size: 72px;
+  text-transform: uppercase;
+}
+
+.description {
+  max-width: 660px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.body {
+  padding: 64px 20px;
+  color: hsl(var(--white));
+  background: hsl(var(--dark));
+}
+
+.content {
+  max-width: 660px;
+}
+
+.metaInfo {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+}
+
+.metaItem {
+  &:not(:last-child) {
+    margin-right: 70px;
+  }
+}
+
+.metaLabel {
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-transform: uppercase;
+  opacity: 50%;
+}
+
+.back {
+  position: relative;
+  margin-top: 30px;
+  color: hsl(var(--white));
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  &::before {
+    display: inline-block;
+    margin-right: 5px;
+    transition: transform 0.2s ease-in;
+    content: '← ';
+  }
+
+  &:hover {
+    &::before {
+      transform: translateX(-4px);
+    }
+  }
+}

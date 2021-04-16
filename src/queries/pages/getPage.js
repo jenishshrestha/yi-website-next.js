@@ -20,6 +20,22 @@ query GET_PAGE($uri: String) {
           ...SeoFragment
         }
 	}
+	works {
+      nodes {
+        title
+        uri
+        slug
+        id
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        workCptOptions {
+          projectHeading
+        }
+      }
+    }
 }
 ${MenuFragment}
 ${ImageFragment}
