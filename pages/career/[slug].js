@@ -7,6 +7,7 @@ import {
   GET_CAREERS,
   GET_CAREER,
 } from "./../../src/queries/career/career-queries"
+import Career from "./../../src/components/layout/career/career"
 
 const Work = ({ data }) => {
   const router = useRouter()
@@ -24,6 +25,7 @@ const Work = ({ data }) => {
     <>
       <Seo seo={work?.seo} uri={work?.uri} twitter={twitter} />
       {work?.title}
+      <Career/>
     </>
   )
 }
@@ -94,3 +96,4 @@ export async function getStaticPaths() {
     fallback: false,
   }
 }
+
