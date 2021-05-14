@@ -1,0 +1,226 @@
+.career__page{
+    background: linear-gradient(0deg, rgba(41, 37, 35, 0.7), rgba(41, 37, 35, 0.7)), url("https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80") center center no-repeat;
+    background-attachment: fixed;
+    background-size:100% auto;
+    mix-blend-mode: normal;
+}
+.career_banner{
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding-top: 294px;
+    padding-bottom: 94px;
+    z-index: 9;
+    .career-title{
+        text-align: center;
+        margin-bottom: 165px;
+        font-weight: 300;
+        font-size: 45px;
+        line-height: 140%;
+    }
+    .scroll{
+        text-align: center;
+        font-size: 14px;
+        line-height: 140%;
+        text-transform: uppercase;
+        opacity: 0.5;
+        position: relative;
+        padding-bottom: 12px;
+        &:after{
+            content:"";
+            position: absolute;
+            top:100%;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 71px;
+            width: 1px;
+            background: #fff;
+        }
+    }
+}
+
+
+
+.career_svgs{
+    .homeBanner__content--wrapper{
+        height: 507px;
+    }
+    .career__banner-detail {
+        position: absolute;
+        max-width: 436px;
+        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 40px;
+    }
+}
+.career__banner-image{
+    margin-top: 201px;
+    height: 386px;
+    & > div{
+        width: 100%;
+        position: absolute!important;
+        bottom:-35px;
+        img{
+            object-fit: cover;
+        }
+    }
+}
+.why_work_with_us,
+.vaccancies{
+    color: white;
+}
+.vaccancies{
+    margin:221px 0 168px;
+    ul li a{
+        font-weight: 300;
+        font-size: 45px;
+        line-height: 140%;
+        padding: 40px 0;
+        max-width: 774px;
+        width: 100%;
+        border-bottom:1px solid #fff;
+        display: block;
+    }
+}
+.why-image,
+.career__banner-image{
+    
+    position: relative;
+    overflow: hidden;
+    &:before{
+        content:"";
+        position: absolute;
+        top:-35px;
+        left:0;
+        right:0;
+        height:35px;
+        width:100%;
+        background: #292523;
+        z-index: 10;
+    }
+    &:after{
+        content:"";
+        position: absolute;
+        bottom:-35px;
+        left:0;
+        right:0;
+        height:35px;
+        width:100%;
+        background: #292523;
+        z-index: 10;
+    }
+}
+
+.why_work_with_us{
+    overflow: hidden;
+    h2{
+        font-weight: 300;
+        font-size: 45px;
+        line-height: 140%;
+    }
+    .desc{
+        max-width: 1240px;
+        margin: 0 auto;
+    }
+    .why-image{
+        height: 416px;
+    }
+    .image > div{
+        width:100%;
+        img{
+            object-fit: cover;
+        }
+    }
+    span{
+        font-size: 28px;
+        line-height: 160%;
+        margin-bottom: 23px;
+        display: block;
+        
+    }
+    p{
+        font-size: 18px;
+        line-height: 160%;
+        margin-bottom: 139px;
+    }
+    display: grid;
+    // grid-column-gap: 232px;
+    grid-row-gap: 232px;
+    grid-template-columns: repeat(3,1fr);
+    .impact{
+        grid-column-start: 2;
+        grid-row:2;
+        grid-column-end: span 3;
+        .desc{
+            opacity:0;
+            transform: translateX(-100%);
+        }
+        .career-image-1{
+            transform: translateX(100%)
+        }
+    }
+    .culture{
+        grid-column-start: 1;
+        grid-row:3;
+        grid-column-end: span 2;
+        .desc{
+            opacity:0;
+            transform: translateX(100%);
+        }
+        .career-image-2{
+            transform: translateX(-100%)
+        }
+    }
+    .environment{
+        grid-column-start: 2;
+        grid-row:4;
+        grid-column-end: span 3;
+        .desc{
+            opacity:0;
+            transform: translateX(-100%);
+        }
+        .career-image-3{
+            transform: translateX(100%)
+        }
+    }
+    .contact{
+        transform: translateY(50%);
+        overflow: hidden;
+        grid-column-start: 2;
+        grid-row:5;
+        grid-column-end: span 3;
+        email{
+            font-weight: 300;
+            font-size: 45px;
+            line-height: 140%;
+            margin-bottom: 40px;
+            display: block;
+        }
+        .address{
+            opacity: 0.5;
+            phone{
+                display: block;
+                margin-bottom: 18px;
+                svg{
+                    margin-right: 6px;
+                }
+            }
+            reach{
+                display: block;
+                svg{
+                    margin-right: 8px;
+                }
+            }
+        }        
+        .social-icons ul{
+            display: flex;
+            margin:26px 0 210px;
+            li{
+                opacity: 0.4;
+                margin-right: 12px;
+            }
+        }
+    }
+}

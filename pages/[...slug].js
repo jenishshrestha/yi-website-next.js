@@ -17,7 +17,7 @@ import dynamic from "next/dynamic"
 const Page = ({ data }) => {
   console.log(data)
   const router = useRouter()
-
+  console.log(data);
   if (router.isFallback) {
     return <div>Generating Static Page</div>
   }
