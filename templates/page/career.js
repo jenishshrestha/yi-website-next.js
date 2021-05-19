@@ -9,8 +9,7 @@ import {
 import Image from 'next/image'
 import Typewriter from 'typewriter-effect';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-
+import SmoothScroll from "./SmoothScroll";
 
 const Career = ({ page }) => {
   let image = useRef(null),
@@ -24,28 +23,39 @@ const Career = ({ page }) => {
     cbdetail = useRef(null)
 
   gsap.registerPlugin(ScrollTrigger);
-  
   useEffect(() => {
     gsap.to(".career_banner .container", {
       duration: 1,
       opacity:0,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: ".career_banner .container",
-        start: 'top 20%',
-        end: 'top 15%',
-        scrub: true
-      }
-    });
-    gsap.to(".career__page", {
-      duration: 4,
-      opacity:1,
-      background: 'linear-gradient(0deg, rgba(41, 37, 35, 1), rgba(41, 37, 35, 1))',
       ease: 'SlowMo.out',
       scrollTrigger: {
         trigger: ".career_svgs",
-        start: 'top 60%',
-        end: "top -10%",
+        start: 'top 90%',
+        end: 'top 85%',
+        scrub: true
+      }
+    });
+    gsap.to(".career_bg-image", {
+      duration: 4,
+      opacity:1,
+      scale: 1.1,
+      ease: 'SlowMo.in',
+      scrollTrigger: {
+        trigger: ".career_svgs",
+        start: 'top 80%',
+        end: "top 10%",
+        scrub: true
+      }
+    });
+    gsap.to(".career_bg-image-overlay", {
+      duration: 4,
+      opacity:1,
+      background: 'linear-gradient(0deg, rgba(41, 37, 35, 1), rgba(41, 37, 35, 1))',
+      ease: 'power2.inOut',
+      scrollTrigger: {
+        trigger: ".career_svgs",
+        start: 'top 80%',
+        end: "top 10%",
         scrub: true
       }
     });
@@ -192,8 +202,6 @@ const Career = ({ page }) => {
     });
   }, []);
   
- 
-
 // gsap scroll animation ends
 
   const pumpkinAnimationFunction = () => {
@@ -224,6 +232,9 @@ const Career = ({ page }) => {
     return pumpkinAnimation
   }
 
+
+  
+
   useEffect(() => {
     let master = gsap.timeline()
     master
@@ -231,8 +242,12 @@ const Career = ({ page }) => {
   }, [])
 
   return <>
-  <div className="career__page">
     <div className="career_banner flex justify-center items-center">
+      <div class="career_bg-image" style={{width: '100vw', height: '100vh' }}>
+        <Image src="/careerbg.jpg" className="career-image-2"  alt="career_culture" layout="fill" objectFit="cover"/>
+      </div>
+      <div class="career_bg-image-overlay">
+      </div>
       <div className="container">
         <h1 className="career-title" ref={careertitle}><Typewriter
           onInit={(typewriter) => {
@@ -249,6 +264,9 @@ const Career = ({ page }) => {
         </div>
       </div>
     </div>
+  <SmoothScroll>
+  <div className="career__page">
+    
     <div className="career_svgs homeBanner__content" ref={careersvg}>
         <div className="container">
           <div className="homeBanner__content--wrapper">
@@ -287,8 +305,8 @@ const Career = ({ page }) => {
           </li>
         </ul>
       </div>
-      <div className="career__banner-image image">
-        <Image className="career-image" src="/career-banner.jpg" alt="career_banner" width="1024" height="416" />
+      <div className="career__banner-image image" style={{width: '100vw', height: '416px'}}>
+        <Image className="career-image" src="/career-banner.jpg" alt="career_banner" layout="fill" objectFit="cover"/>
       </div>
     </div>
     <div className="why_work_with_us  grid grid-cols-3 container">
@@ -302,8 +320,8 @@ const Career = ({ page }) => {
               who believe that to achieve the biggest impact, collaboration and innovation are key. 
             </p>
           </div>
-        <div className="why-image image-1">
-          <Image src="/impact.jpg" className="career-image-1" alt="career_impact" width="730" height="403"/>
+        <div className="why-image image-1" style={{width: '730px', height: '403px'}}>
+          <Image src="/impact.jpg" className="career-image-1" alt="career_impact"  layout="fill" objectFit="cover"/>
         </div>
       </div>
 
@@ -317,8 +335,8 @@ const Career = ({ page }) => {
             products we can take pride in.
           </p>
         </div>
-        <div className="why-image image-2">
-          <Image src="/culture.jpg" className="career-image-2"  alt="career_culture" width="730" height="403"/>
+        <div className="why-image image-2" style={{width: '730px', height: '403px'}}>
+          <Image src="/culture.jpg" className="career-image-2"  alt="career_culture" layout="fill" objectFit="cover"/>
         </div>
       </div>
 
@@ -330,8 +348,8 @@ const Career = ({ page }) => {
             We want to ensure that you excel, and we look for people who are just as ambitious and dedicated as we are. 
           </p>
         </div>
-        <div className="why-image image-3">
-          <Image src="/environment.jpg" className="career-image-3" alt="career_environment" width="730" height="403"/>
+        <div className="why-image image-3" style={{width: '730px', height: '403px'}}>
+          <Image src="/environment.jpg" className="career-image-3" alt="career_environment" layout="fill" objectFit="cover"/>
         </div>
       </div>
 
@@ -407,6 +425,7 @@ const Career = ({ page }) => {
 
     </div>
   </div>
+  </SmoothScroll>
   </>
 }
 
