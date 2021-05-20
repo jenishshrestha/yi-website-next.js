@@ -9,7 +9,7 @@ import {
 import Image from 'next/image'
 import Typewriter from 'typewriter-effect';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import SmoothScroll from "./SmoothScroll";
+import SmoothScroll from "./smoothscroll";
 
 const Career = ({ page }) => {
   let image = useRef(null),
